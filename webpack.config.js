@@ -32,10 +32,14 @@ module.exports = {
         use: [
           "style-loader",
           "css-loader",
+          "postcss-loader", // Ajoutez 'postcss-loader' ici
           "sass-loader"
         ]
       },
-      { test: /\.ts$/, use: 'ts-loader' }
+      { 
+        test: /\.ts$/, 
+        use: 'ts-loader' 
+      }
     ],
   },
   resolve: {

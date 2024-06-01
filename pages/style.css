@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Serif+TC&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
 /* .kanit-thin {
   font-family: "Kanit", sans-serif;
@@ -14,7 +14,8 @@
   /* color */
   --color-primary: #44ABCA;
   --color-primary-second: #255f79;
-  
+  --color-primary-tertiary: #b4e2ed;
+
   --color-secondary: #FFE500;
   --color-secondary-second: #d1aa00;
 
@@ -24,6 +25,8 @@
   --color-primary-contrast: #ffffff;
   --color-secondary-contrast: #000000;
   --color-tertiary-contrast: #ffffff;
+
+  --background-black: #222223;
 }
 
 * {
@@ -33,9 +36,15 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 
-  font-family: "Kanit", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
 
-  /* user-select: none; */
+.button:focus {
+  outline: none;
+}
+
+.button {
+  transition: background-color 0.3s ease;
 }
 
 .header-acc {
@@ -62,6 +71,7 @@
 h1 {
   font-size: 2rem;
   font-weight: 700;
+  font-family: "Kanit", sans-serif;
   color: var(--color-secondary);
 
   margin-left: 1rem;
@@ -362,4 +372,626 @@ h6 span {
   }
 }
 
-.footer-app {}
+/* app */
+
+h2 {
+  text-align: center;
+  color: var(--color-secondary);
+  font-size: 3rem;
+  width: 100%;
+}
+
+.body {
+  display: flex;
+  background-color: var(--background-black);
+}
+
+#header-container-col {
+  position: static;
+  height: 100vh;
+  width: 20rem;
+}
+
+#header-col {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--color-primary);
+  height: 100vh;
+  width: 15rem;
+
+  .logo-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: auto;
+    margin-top: 2rem;
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+
+      margin-left: 1rem;
+
+      span {
+        color: var(--color-tertiary);
+      }
+    }
+
+    img {
+      border-radius: 1rem;
+      width: 5rem;
+    }
+  }
+}
+
+.button-col {
+  padding: 0.4rem 0;
+  color: var(--color-primary-contrast);
+  background-color: var(--color-primary);
+  border: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+}
+
+.button-col:last-child {
+  margin-bottom: auto;
+}
+
+.button-col:focus {
+  outline: none;
+}
+
+.button-col:hover {
+  color: var(--color-secondary);
+  background-color: var(--color-primary-second);
+}
+
+.button-col.select {
+  color: var(--color-secondary);
+  background-color: var(--color-primary-second);
+}
+
+#logout-col {
+  margin-top: 2rem;
+}
+
+#logout-col:hover {
+  color: var(--color-tertiary);
+}
+
+#app-corp {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  padding-top: 3rem;
+  width: 100%;
+}
+
+.card-col {
+  width: 30%;
+  min-width: 290px;
+  max-width: 360px;
+  max-height: 90%;
+  height: 30rem;
+  /* border: 0.3rem solid var(--color-primary-second); */
+  border-radius: 1rem;
+  margin: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--color-primary-tertiary);
+  box-shadow: 0px 10px 21px 0px rgba(37, 94, 121, 0.25);
+}
+
+.card-title-col {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  background-color: var(--color-primary-second);
+  color: var(--color-primary-contrast);
+}
+
+.card-content-col {
+  overflow: auto;
+}
+
+.task-view-col {
+  width: 100%;
+
+  padding: 1rem;
+  padding-top: 0.5rem;
+
+  border-top: 1px solid var(--color-primary-second);
+  border-bottom: 1px solid var(--color-primary-second);
+
+  background-color: var(--color-primary);
+
+  .task-description-col {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    color: #000000;
+  }
+
+  .task-title-col {
+    color: var(--color-tertiary);
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: "Kanit", sans-serif;
+    ;
+  }
+
+  .task-create-col {
+    text-align: right;
+    color: #000000;
+  }
+
+  .task-make-befor-col {
+    text-align: right;
+    color: #000000;
+  }
+}
+
+.finance-yoursold-col {
+  color: black;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+
+  .finance-sold-col.neg {
+    color: red;
+  }
+
+  .finance-sold-col.pos {
+    color: green;
+  }
+}
+
+.finance-youpaye-col {
+  color: black;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.finance-last-col {
+  color: black;
+  padding-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.finance-view-col {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+
+  padding: 0.8rem;
+
+  border-top: 1px solid var(--color-primary-second);
+  border-bottom: 1px solid var(--color-primary-second);
+
+  background-color: var(--color-primary);
+}
+
+.comunicate-col {
+  justify-content: space-evenly;
+  width: 100%;
+
+  padding: 0.8rem;
+
+  border-top: 1px solid var(--color-primary-second);
+  border-bottom: 1px solid var(--color-primary-second);
+
+  background-color: var(--color-primary);
+
+  .comunicate-title-col {
+    text-align: center;
+    color: var(--color-tertiary);
+    font-size: 1.3rem;
+  }
+
+  .comunicate-content-col {
+    color: #000000;
+  }
+
+  .comunicate-date-col {
+    color: #000000;
+    text-align: right;
+  }
+}
+
+.container-financecol {
+  display: grid;
+  align-items: center;
+  justify-content: space-evenly;
+  grid-template-columns: 0.5fr 1fr;
+  grid-template-rows: 0.2fr 1fr 1fr;
+  padding: 1rem;
+  grid-template-areas:
+    "sold sold"
+    "youowe lastexp"
+    "oweyou addexp";
+  width: 100%;
+  min-height: 100%;
+  column-gap: 1rem;
+  row-gap: 1.5rem;
+
+  .solde-financecol {
+    grid-area: sold;
+    width: 100%;
+
+    .sold-title-financecol {
+      font-size: 1.9rem;
+      color: var(--color-secondary);
+      font-weight: 700;
+    }
+  }
+
+  .you-owe-financecol {
+    grid-area: youowe;
+    /* padding: 0.5rem; */
+    width: 100%;
+    height: 100%;
+    /* border: 0.3rem solid var(--color-primary-second); */
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--color-primary-tertiary);
+    box-shadow: 0px 10px 21px 0px rgba(37, 94, 121, 0.25);
+
+    .you-owe-title-financecol {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-primary-second);
+      text-align: center;
+      font-size: 1.3rem;
+    }
+
+    .you-owe-content-financecol {
+      overflow: auto;
+
+      .line {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: var(--color-primary);
+        padding: 1rem;
+        border-bottom: 2px solid var(--color-primary-second);
+
+        .who {
+          color: #000000;
+          font-size: 1.3rem;
+        }
+
+        .pay {
+          background-color: var(--color-secondary);
+          cursor: pointer;
+          padding: 0.2rem 1rem;
+          border-radius: 5px;
+          border: 0;
+          margin: 0 1.3rem;
+        }
+
+        .pay:hover {
+          background-color: var(--color-secondary-second);
+        }
+
+        .mutch {
+          font-size: 1.3rem;
+          color: #000000;
+        }
+
+        .edit {
+          display: flex;
+          flex-direction: column;
+          
+          .delete {
+            border: 0;
+            background-color: var(--color-tertiary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            font-size: 10px;
+          }
+
+          .delete:hover {
+            background-color: var(--color-tertiary-second);
+          }
+
+          .edit- {
+            border: 0;
+            background-color: var(--color-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+          }
+
+          .edit-:hover {
+            background-color: var(--color-secondary-second);
+          }
+        }
+      }
+    }
+  }
+
+  .last-expence-financecol {
+    grid-area: lastexp;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--color-primary-tertiary);
+    box-shadow: 0px 10px 21px 0px rgba(37, 94, 121, 0.25);
+
+    .last-expence-title-financecol {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-primary-second);
+      text-align: center;
+      font-size: 1.3rem;
+    }
+
+    .last-expence-content-financecol {
+      overflow: auto;
+
+      .line {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: var(--color-primary);
+        padding: 1rem;
+        border-bottom: 2px solid var(--color-primary-second);
+
+        .title {
+          font-size: 1.3rem;
+          color: var(--color-tertiary);
+        }
+
+        .desc {
+          color: #000000;
+          width: 40%;
+        }
+
+        .price {
+          color: var(--color-secondary);
+          font-size: 1.3rem;
+        }
+
+        .who {
+          color: #000000;
+        }
+
+        .edit {
+          display: flex;
+          flex-direction: column;
+          
+          .delete {
+            border: 0;
+            background-color: var(--color-tertiary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            font-size: 10px;
+          }
+
+          .delete:hover {
+            background-color: var(--color-tertiary-second);
+          }
+
+          .edit- {
+            border: 0;
+            background-color: var(--color-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+          }
+
+          .edit-:hover {
+            background-color: var(--color-secondary-second);
+          }
+        }
+      }
+    }
+  }
+
+  .owe-you-financecol {
+    grid-area: oweyou;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--color-primary-tertiary);
+    box-shadow: 0px 10px 21px 0px rgba(37, 94, 121, 0.25);
+
+    .owe-you-title-financecol {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-primary-second);
+      text-align: center;
+      font-size: 1.3rem;
+    }
+
+    .owe-you-content-financecol {
+      overflow: auto;
+
+      .line {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: var(--color-primary);
+        padding: 1rem;
+        border-bottom: 2px solid var(--color-primary-second);
+
+        .who {
+          color: #000000;
+          font-size: 1.3rem;
+        }
+
+        .pay {
+          background-color: var(--color-secondary);
+          cursor: pointer;
+          padding: 0.2rem 1rem;
+          border-radius: 5px;
+          border: 0;
+          margin: 0 1.3rem;
+        }
+
+        .pay:hover {
+          background-color: var(--color-secondary-second);
+        }
+
+        .mutch {
+          font-size: 1.3rem;
+          color: #000000;
+        }
+
+        .edit {
+          display: flex;
+          flex-direction: column;
+          
+          .delete {
+            border: 0;
+            background-color: var(--color-tertiary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            font-size: 10px;
+          }
+
+          .delete:hover {
+            background-color: var(--color-tertiary-second);
+          }
+
+          .edit- {
+            border: 0;
+            background-color: var(--color-secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 10px;
+          }
+
+          .edit-:hover {
+            background-color: var(--color-secondary-second);
+          }
+        }
+      }
+    }
+  }
+
+  .add-expence-financecol {
+    grid-area: addexp;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--color-primary-tertiary);
+    box-shadow: 0px 10px 21px 0px rgba(37, 94, 121, 0.25);
+
+    .add-expence-title-financecol {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-primary-second);
+      text-align: center;
+      font-size: 1.3rem;
+    }
+
+    form {
+      margin: 0 auto;
+      padding-top: 1rem;
+      border: 0;
+      border-radius: 5px;
+      background-color: transparent;
+    }
+    
+    .input-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      margin-top: 1rem;
+      align-items: center;
+    
+      input[name="price"] {
+        width: 50%;
+      }
+    }
+    
+    label {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #000000;
+      display: none; /* Cache les labels */
+    }
+    
+    input[type="text"], textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    textarea {
+      min-height: 120px;
+    }
+    
+    input[type="text"]::placeholder, textarea::placeholder {
+      color: #999;
+    }
+    
+    textarea {
+      resize: vertical;
+    }
+    
+    input[type="submit"] {
+      margin-top: 0.5rem;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 3px;
+      background-color: var(--color-secondary);
+      color: black;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: var(--color-secondary-second);
+    }
+    
+  }
+}
+

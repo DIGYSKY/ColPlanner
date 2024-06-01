@@ -21,7 +21,7 @@ export default {
         return c.substring(nameEQ.length, c.length);
       }
     }
-    return null;
+    return false;
   },
 
   deleteCookie(name) {

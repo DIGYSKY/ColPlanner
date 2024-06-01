@@ -6,7 +6,30 @@ const Login = class {
   constructor() {
     this.el = document.querySelector('#root');
     this.apiLinks = 'http://localhost:81';
+    this.apiKey = coockieManager.getCookie('apikey');
     this.run();
+  }
+
+  async getLog() {
+    let success = false;
+    if (this.apiKey) {
+      try {
+        await axios.get(`${this.apiLinks}/login`, {
+          headers: {
+            'Api-Key': this.apiKey
+          }
+        });
+        success = true;
+      } catch (error) {
+        coockieManager.deleteCookie('apikey');
+        coockieManager.deleteCookie('user');
+
+        this.apiKey = false;
+
+        success = false;
+      }
+    }
+    return success;
   }
 
   render() {
@@ -46,7 +69,7 @@ const Login = class {
           coockieManager.setCookie('apikey', request.data.apikey, 7);
           coockieManager.setCookie('user', request.data.user, 7);
           error.innerHTML = '';
-          window.location.href = '/login';
+          window.location.href = '/dashboard';
         } else if (request.status >= 500) {
           error.innerHTML = 'Erreur du serveur veuillez rééseyer plus tards !';
         }
@@ -77,7 +100,11 @@ const Login = class {
     });
   }
 
-  run() {
+  async run() {
+    if (await this.getLog()) {
+      window.location.href = '/dashboard';
+    }
+
     this.el.innerHTML = this.render();
     this.singUp();
     this.singIn();
