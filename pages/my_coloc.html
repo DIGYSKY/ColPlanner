@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <title>ColPlanner</title>
 </head>
 
@@ -18,7 +19,7 @@
         </div>
         <button id="dashboard-col" class="button-col main-col">DashBoard</button>
         <button id="tasks-col" class="button-col main-col">Tasks</button>
-        <button id="finance-col" class="button-col main-col select">Finance</button>
+        <button id="finance-col" class="button-col main-col">Finance</button>
         <button id="calandar-col" class="button-col main-col">Calandar</button>
         <button id="mycoloc-col" class="button-col main-col">My coloc</button>
         <button id="profile-col" class="button-col main-col">Profile</button>
@@ -26,6 +27,44 @@
       </div>
     </header>
     <main id="app-corp">
+      <div class="mx-auto my-auto flex gap-5 flex-wrap">
+
+        <!-- Card pour afficher toutes les personnes présentes dans la colocation -->
+        <div class="bg-white p-6 rounded shadow">
+          <h3 class="text-xl font-semibold mb-4 text-yellow-500">Personnes dans la colocation</h3>
+          <ul id="coloc-members" class="space-y-2">
+            <li class="flex justify-between items-center bg-gray-200 p-4 rounded text-black font-bold">
+              <span>Robert</span>
+              <span>35 €</span>
+              <button class="bg-red-600 text-white px-4 py-2 rounded">Supprimer</button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card pour ajouter des personnes via leur email -->
+        <div class="bg-white p-6 rounded shadow">
+          <h3 class="text-xl font-semibold mb-4 text-yellow-500">Ajouter une personne</h3>
+          <form id="add-member-form" class="space-y-4">
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+              <input type="email" id="email" name="email"
+                class="mt-1 block w-full border border-gray-300 rounded py-2 px-3">
+            </div>
+            <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded">Ajouter</button>
+          </form>
+        </div>
+
+        <!-- Card pour afficher le lien pour rejoindre la colocation -->
+        <div class="bg-white p-6 rounded shadow">
+          <h3 class="text-xl font-semibold mb-4 text-yellow-500">Lien pour rejoindre la colocation</h3>
+          <div class="flex items-center space-x-4">
+            <input type="text" value="http://example.com/join-coloc" readonly
+              class="block w-full border border-gray-300 rounded py-2 px-3">
+            <button class="bg-blue-500 text-white px-4 py-2 rounded">Copier</button>
+          </div>
+        </div>
+
+      </div>
     </main>
   </div>
 </body>

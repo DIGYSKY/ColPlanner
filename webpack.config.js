@@ -32,7 +32,7 @@ module.exports = {
         use: [
           "style-loader",
           "css-loader",
-          "postcss-loader", // Ajoutez 'postcss-loader' ici
+          "postcss-loader",
           "sass-loader"
         ]
       },

@@ -3,6 +3,11 @@ import coockieManager from '../models/cookieManager';
 import app from '../views/app.view';
 import dashboard from '../views/app/dashboard';
 import finance from '../views/app/finance';
+import myColoc from '../views/app/myColoc';
+import tasks from '../views/app/tasks';
+import comunicate from '../views/app/comunicate';
+import calandar from '../views/app/calandar';
+import profile from '../views/app/profile';
 
 const App = class {
   constructor() {
@@ -76,28 +81,32 @@ const App = class {
     this.selectMenu(curentPage !== null ? curentPage : 'dashboard-col');
 
     mainButtons.forEach((mainButton) => {
-      mainButton.addEventListener('click', (event) => {
+      mainButton.addEventListener('click', async (event) => {
         event.preventDefault();
-        this.selectMenu(event.target.id);
+        await this.selectMenu(event.target.id);
       });
     });
   }
 
-  selectMenu(id) {
+  async selectMenu(id) {
     const mainButtons = Array.from(document.querySelectorAll('.main-col'));
     const main = document.querySelector('#app-corp');
 
     let select = false;
 
-    if (id === 'dashboard-col') {
+    const renderFunctions = {
+      'dashboard-col': this.renderDashboard,
+      'finance-col': this.renderFinance,
+      'mycoloc-col': this.renderMyColoc,
+      'tasks-col': this.renderTasks,
+      'comunicate-col': this.renderComunicate,
+      'calandar-col': this.renderCalandar,
+      'profile-col': this.renderProfile
+    };
+
+    if (renderFunctions[id]) {
       main.innerHTML = '';
-      main.innerHTML = this.renderDashboard();
-      if (main.innerHTML) {
-        select = true;
-      }
-    } else if (id === 'finance-col') {
-      main.innerHTML = '';
-      main.innerHTML = this.renderFinance();
+      main.innerHTML = await renderFunctions[id].call(this);
       if (main.innerHTML) {
         select = true;
       }
@@ -115,12 +124,49 @@ const App = class {
     }
   }
 
-  renderFinance() {
+  async renderFinance() {
     return finance();
   }
 
-  renderDashboard() {
+  async renderDashboard() {
     return dashboard(this.user);
+  }
+
+  async renderMyColoc() {
+    let response;
+
+    try {
+      response = await axios.get(`${this.apiLinks}/coloc`, {
+        headers: {
+          'Api-Key': this.apiKey
+        }
+      });
+    } catch (error) {
+      this.selectMenu('dashboard-col');
+    }
+
+    const colocData = {
+      users: response.data[1].users,
+      coloc: response.data
+    };
+
+    return myColoc(colocData);
+  }
+
+  async renderTasks() {
+    return tasks();
+  }
+
+  async renderComunicate() {
+    return comunicate();
+  }
+
+  async renderCalandar() {
+    return calandar();
+  }
+
+  async renderProfile() {
+    return profile();
   }
 
   async run() {
