@@ -33,7 +33,7 @@ export default () => (`
 <!-- Card pour le bouton de déconnexion -->
 <div class="bg-white p-6 rounded shadow w-full sm:w-4/5 mb-5">
   <h3 class="text-xl font-semibold mb-4 text-yellow-500">Déconnexion</h3>
-  <button id="logout" class="bg-red-600 text-white px-4 py-2 rounded">Se déconnecter</button>
+  <button class="bg-red-600 text-white px-4 py-2 rounded logout-profile">Se déconnecter</button>
 </div>
 
 </div>

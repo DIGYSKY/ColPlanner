@@ -15,7 +15,6 @@ export default () => (`
   <button id="calandar-col" class="button-col main-col">Calandar</button>
   <button id="mycoloc-col" class="button-col main-col">My coloc</button>
   <button id="profile-col" class="button-col main-col">Profile</button>
-  <button id="logout-col" class="button-col">Logout</button>
 </div>
 </header>
 <main id="app-corp">

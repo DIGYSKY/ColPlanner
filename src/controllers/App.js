@@ -1,13 +1,13 @@
 import axios from 'axios';
 import coockieManager from '../models/cookieManager';
 import app from '../views/app.view';
-import dashboard from '../views/app/dashboard';
-import finance from '../views/app/finance';
-import myColoc from '../views/app/myColoc';
-import tasks from '../views/app/tasks';
-import comunicate from '../views/app/comunicate';
-import calandar from '../views/app/calandar';
-import profile from '../views/app/profile';
+import MyColoc from './MyColoc';
+import Dashboard from './Dashboard';
+import Finance from './Finance';
+import Tasks from './Tasks';
+import Comunicate from './Comunicate';
+import Calandar from './Calandar';
+import Profile from './Profile';
 
 const App = class {
   constructor() {
@@ -15,70 +15,35 @@ const App = class {
     this.apiLinks = 'http://localhost:81';
     this.apiKey = coockieManager.getCookie('apikey');
     this.user = JSON.parse(coockieManager.getCookie('user'));
+    this.currentColoc = this.user.current_coloc ? this.user.current_coloc : false;
     this.run();
   }
 
   async getLog() {
-    let success = false;
-    if (this.apiKey) {
-      try {
-        await axios.get(`${this.apiLinks}/login`, {
-          headers: {
-            'Api-Key': this.apiKey
-          }
-        });
-        success = true;
-      } catch (error) {
-        coockieManager.deleteCookie('apikey');
-        coockieManager.deleteCookie('user');
-
-        this.apiKey = false;
-
-        localStorage.removeItem('page');
-
-        success = false;
-      }
+    if (!this.apiKey) return false;
+    try {
+      await axios.get(`${this.apiLinks}/login`, {
+        headers: { 'Api-Key': this.apiKey }
+      });
+      return true;
+    } catch (error) {
+      this.handleLogout();
+      return false;
     }
-    return success;
   }
 
-  render() {
-    return app();
-  }
-
-  logout() {
-    const logoutButton = document.querySelector('#logout-col');
-
-    logoutButton.addEventListener('click', async (event) => {
-      event.preventDefault();
-
-      try {
-        await axios.delete(`${this.apiLinks}/login`, {
-          headers: {
-            'Api-Key': this.apiKey
-          }
-        });
-
-        coockieManager.deleteCookie('apikey');
-        coockieManager.deleteCookie('user');
-
-        this.apiKey = false;
-
-        localStorage.removeItem('page');
-
-        window.location.href = '/login';
-      } catch (error) {
-        window.location.href = '/dashboard';
-      }
-    });
+  handleLogout() {
+    coockieManager.deleteCookie('apikey');
+    coockieManager.deleteCookie('user');
+    this.apiKey = false;
+    localStorage.removeItem('page');
+    window.location.href = '/login';
   }
 
   main() {
     const mainButtons = Array.from(document.querySelectorAll('.main-col'));
-    const curentPage = localStorage.getItem('page');
-
-    // default page
-    this.selectMenu(curentPage !== null ? curentPage : 'dashboard-col');
+    const curentPage = localStorage.getItem('page') || 'dashboard-col';
+    this.selectMenu(curentPage);
 
     mainButtons.forEach((mainButton) => {
       mainButton.addEventListener('click', async (event) => {
@@ -89,93 +54,37 @@ const App = class {
   }
 
   async selectMenu(id) {
-    const mainButtons = Array.from(document.querySelectorAll('.main-col'));
     const main = document.querySelector('#app-corp');
-
-    let select = false;
-
     const renderFunctions = {
-      'dashboard-col': this.renderDashboard,
-      'finance-col': this.renderFinance,
-      'mycoloc-col': this.renderMyColoc,
-      'tasks-col': this.renderTasks,
-      'comunicate-col': this.renderComunicate,
-      'calandar-col': this.renderCalandar,
-      'profile-col': this.renderProfile
+      'dashboard-col': Dashboard,
+      'finance-col': Finance,
+      'mycoloc-col': MyColoc,
+      'tasks-col': Tasks,
+      'comunicate-col': Comunicate,
+      'calandar-col': Calandar,
+      'profile-col': Profile
     };
 
     if (renderFunctions[id]) {
-      main.innerHTML = '';
-      main.innerHTML = await renderFunctions[id].call(this);
-      if (main.innerHTML) {
-        select = true;
+      if (this.currentInstance && this.currentInstance.destroy) {
+        this.currentInstance.destroy();
       }
-    }
-
-    if (select && mainButtons) {
-      localStorage.setItem('page', id);
-      document.querySelector(`#${id}`).classList.add('select');
-
-      mainButtons.forEach((button) => {
-        if (button.id !== id) {
-          button.classList.remove('select');
-        }
-      });
+      main.innerHTML = '';
+      this.currentPage = await new renderFunctions[id](id);
     }
   }
 
-  async renderFinance() {
-    return finance();
-  }
-
-  async renderDashboard() {
-    return dashboard(this.user);
-  }
-
-  async renderMyColoc() {
-    let response;
-
-    try {
-      response = await axios.get(`${this.apiLinks}/coloc`, {
-        headers: {
-          'Api-Key': this.apiKey
-        }
-      });
-    } catch (error) {
-      this.selectMenu('dashboard-col');
-    }
-
-    const colocData = {
-      users: response.data[1].users,
-      coloc: response.data
-    };
-
-    return myColoc(colocData);
-  }
-
-  async renderTasks() {
-    return tasks();
-  }
-
-  async renderComunicate() {
-    return comunicate();
-  }
-
-  async renderCalandar() {
-    return calandar();
-  }
-
-  async renderProfile() {
-    return profile();
+  async render() {
+    return app();
   }
 
   async run() {
     if (!(await this.getLog())) {
-      window.location.href = '/login';
+      this.handleLogout();
+    } else {
+      this.el.innerHTML = await this.render();
+      this.main();
     }
-    this.el.innerHTML = this.render();
-    this.logout();
-    this.main();
   }
 };
 
