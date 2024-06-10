@@ -25,6 +25,7 @@ const App = class {
       await axios.get(`${this.apiLinks}/login`, {
         headers: { 'Api-Key': this.apiKey }
       });
+
       return true;
     } catch (error) {
       this.handleLogout();

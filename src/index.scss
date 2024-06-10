@@ -1001,3 +1001,32 @@ h2 {
     
   }
 }
+
+.fc-toolbar {
+  @apply flex justify-between items-center p-4 bg-gray-100;
+}
+
+.fc-button {
+  @apply bg-blue-500 text-white px-4 py-2 rounded;
+}
+
+.fc-button:hover {
+  @apply bg-blue-600;
+}
+
+.fc-timegrid-slot {
+  @apply text-black;
+}
+
+.fc-daygrid-day {
+  @apply text-black;
+}
+
+.fc-toolbar-title {
+  font-weight: bold;
+  color: red;
+}
+
+.fc-col-header-cell-cushion {
+  color: red !important;
+}
