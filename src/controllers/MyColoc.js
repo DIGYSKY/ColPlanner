@@ -25,6 +25,14 @@ const MyColoc = class {
     }
   }
 
+  handleLogout() {
+    coockieManager.deleteCookie('apikey');
+    coockieManager.deleteCookie('user');
+    this.apiKey = false;
+    localStorage.removeItem('page');
+    window.location.href = '/login';
+  }
+
   async getCurrentColoc() {
     let request;
     try {
@@ -37,14 +45,6 @@ const MyColoc = class {
     const currentColoc = request.data.success.current_coloc;
     coockieManager.setCookie('current_coloc', currentColoc, 7);
     return currentColoc;
-  }
-
-  handleLogout() {
-    coockieManager.deleteCookie('apikey');
-    coockieManager.deleteCookie('user');
-    this.apiKey = false;
-    localStorage.removeItem('page');
-    window.location.href = '/login';
   }
 
   async getColoc() {

@@ -9,7 +9,7 @@ export default (colocData, invitation, currentColocId, currentUserId) => (`
     ${colocData.users && colocData.users.length > 0 ? colocData.users.map((user) => `
       <li class="flex justify-between items-center bg-gray-200 p-4 rounded text-black font-bold">
         <span>${user.user_name}</span>
-        <span>${user.user_solde}</span>
+        <span>${user.user_solde ?? 0} €</span>
         <button class="bg-red-600 text-white px-4 py-2 rounded" data-user-id="${user.user_id}" data-user-name="${user.user_name}">${user.user_id === currentUserId ? 'Quitter' : 'Retirer'}</button>
       </li>
     `).join('') : '<li class="text-center text-gray-500">Aucun utilisateur trouvé</li>'}
