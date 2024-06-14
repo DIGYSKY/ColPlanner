@@ -18,7 +18,7 @@ const routes = [{
   controller: Login
 },
 {
-  url: '/dashboard',
+  url: '/app',
   controller: App
 }];
 
