@@ -70,7 +70,7 @@ const Login = class {
           coockieManager.setCookie('user', request.data.user, 7);
           coockieManager.setCookie('current_coloc', request.data.user.current_coloc, 7);
           error.innerHTML = '';
-          window.location.href = '/dashboard';
+          window.location.href = '/app';
         } else if (request.status >= 500) {
           error.innerHTML = 'Erreur du serveur veuillez rééseyer plus tards !';
         }
@@ -103,7 +103,7 @@ const Login = class {
 
   async run() {
     if (await this.getLog()) {
-      window.location.href = '/dashboard';
+      window.location.href = '/app';
     }
 
     this.el.innerHTML = this.render();
