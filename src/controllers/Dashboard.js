@@ -1,3 +1,4 @@
+import axios from 'axios';
 import dashboard from '../views/app/dashboard';
 import coockieManager from '../models/cookieManager';
 
@@ -11,13 +12,45 @@ const Dashboard = class {
     this.run(id);
   }
 
+  async getTasks() {
+    try {
+      const request = await axios.get(`${this.apiLinks}/task/this`, {
+        headers: { 'Api-Key': this.apiKey }
+      });
+      return request.data;
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async getExpenceOwe() {
+    const request = await axios.get(`${this.apiLinks}/expence/this`, {
+      headers: { 'Api-Key': this.apiKey }
+    });
+    return request.data.success;
+  }
+
+  async getComunicate() {
+    try {
+      const request = await axios.get(`${this.apiLinks}/comunicate/this`, {
+        headers: { 'Api-Key': this.apiKey }
+      });
+      return request.data;
+    } catch (error) {
+      return [];
+    }
+  }
+
   async renderDashboard(id) {
     const mainButtons = Array.from(document.querySelectorAll('.main-col'));
     const main = document.querySelector('#app-corp');
+    const tasks = await this.getTasks();
+    const expenceOwe = await this.getExpenceOwe();
+    const comunicate = await this.getComunicate();
 
     let select = false;
 
-    main.innerHTML = dashboard(this.user);
+    main.innerHTML = dashboard(tasks, expenceOwe, comunicate, this.user);
 
     if (main.innerHTML) {
       select = true;
