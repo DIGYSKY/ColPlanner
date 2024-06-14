@@ -49,13 +49,13 @@ const Tasks = class {
   }
 
   actionsTasks() {
-    this.addEventListeners([document.querySelector('.add-task-form')], 'submit', (e) => {
+    this.addEventListeners([document.querySelector('.add-task-form')], 'submit', async (e) => {
       e.preventDefault();
       const title = e.target.querySelector('[name="title"]').value;
       const content = e.target.querySelector('[name="content"]').value;
       const date = e.target.querySelector('[name="date"]').value || null;
       if (title !== '' && content !== '') {
-        if (this.sendTask(title, content, date)) {
+        if (await this.sendTask(title, content, date)) {
           this.run();
         }
       }
