@@ -8,7 +8,7 @@ export default (getTasks) => (`
   <div class="overflow-auto h-full">
     <ul class="task-list space-y-2 h-full overflow-auto">
       ${getTasks.length > 0 ? getTasks.map((task) => `
-      <li class="flex flex-col items-center bg-gray-200 p-4 rounded text-black font-bold mb-4">
+      <li class="flex flex-col items-center bg-gray-200 p-4 rounded text-black font-bold mb-4" data-task-id="${task.id}">
         <span class="text-lg text-red-600">${task.title}</span>
         <span class="text-sm text-gray-600">${task.content}</span>
         <div class="flex flex-col items-center mt-2">

@@ -60,18 +60,29 @@ const Tasks = class {
         }
       }
     });
-    this.addEventListeners([document.querySelector('.make-task')], 'click', async (e) => {
+    this.addEventListeners(document.querySelectorAll('.make-task'), 'click', async (e) => {
       e.preventDefault();
       const { id, make } = e.target.dataset;
       if (await this.patchTask(id, make)) {
-        this.run();
+        if (make === '0') {
+          e.target.className = 'make-task bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700';
+          e.target.dataset.make = '1';
+          e.target.textContent = 'Fait';
+        } else {
+          e.target.className = 'make-task bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700';
+          e.target.dataset.make = '0';
+          e.target.textContent = 'Non fait';
+        }
       }
     });
-    this.addEventListeners([document.querySelector('.delete-task')], 'click', async (e) => {
+    this.addEventListeners(document.querySelectorAll('.delete-task'), 'click', async (e) => {
       e.preventDefault();
       const { id } = e.target.dataset;
       if (await this.deleteTask(id)) {
-        this.run();
+        const task = document.querySelector(`[data-task-id="${id}"]`);
+        if (task) {
+          task.remove();
+        }
       }
     });
   }
