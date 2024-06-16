@@ -41,16 +41,34 @@ const Dashboard = class {
     }
   }
 
+  async getUsers() {
+    let response;
+
+    try {
+      response = await axios.get(`${this.apiLinks}/coloc/all`, {
+        headers: {
+          'Api-Key': this.apiKey
+        }
+      });
+    } catch (error) {
+      coockieManager.deleteCookie('current_coloc');
+      response = [];
+    }
+
+    return response.data[this.currentColoc].users;
+  }
+
   async renderDashboard(id) {
     const mainButtons = Array.from(document.querySelectorAll('.main-col'));
     const main = document.querySelector('#app-corp');
     const tasks = await this.getTasks();
     const expenceOwe = await this.getExpenceOwe();
     const comunicate = await this.getComunicate();
+    const users = await this.getUsers();
 
     let select = false;
 
-    main.innerHTML = dashboard(tasks, expenceOwe, comunicate, this.user);
+    main.innerHTML = dashboard(tasks, expenceOwe, comunicate, this.user, users);
 
     if (main.innerHTML) {
       select = true;

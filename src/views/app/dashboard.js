@@ -1,4 +1,4 @@
-export default (tasks, expenceOwe, comunicate, user) => (`
+export default (tasks, expenceOwe, comunicate, user, users) => (`
 <h2 class="text-2xl font-bold text-yellow-500 mx-auto mt-5 mb-5">Bonjour, ${user.name}</h2>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 w-full min-h-full">
 
@@ -15,6 +15,7 @@ export default (tasks, expenceOwe, comunicate, user) => (`
             ${task.at_before !== null ? `<span class="text-sm text-green-600">À faire avant le ${task.at_before}</span>` : ''}
             <span class="text-sm text-black">Créer le ${task.created_at}</span>
           </div>
+          ${task.asigned_to !== null ? `<span class="text-sm text-blue-600">Assignée à ${users.find((userFind) => userFind.user_id === task.asigned_to).user_name}</span>` : ''}
         </li>
         `).join('') : '<li class="text-center text-gray-500">Aucune tâche disponible</li>'}
       </ul>
