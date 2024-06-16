@@ -1,5 +1,5 @@
 export default (getTasks) => (`
-<h2 class="mx-auto mt-5 mb-5 text-2xl font-bold text-yellow-500">Tasks</h2>
+<h2 class="mx-auto mt-5 mb-5 text-2xl font-bold text-yellow-500">Tâches</h2>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 w-full min-h-full">
 
 <!-- Card pour afficher toutes les tâches -->
