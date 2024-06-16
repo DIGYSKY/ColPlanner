@@ -1,4 +1,4 @@
-export default (getTasks) => (`
+export default (getTasks, users) => (`
 <h2 class="mx-auto mt-5 mb-5 text-2xl font-bold text-yellow-500">Tâches</h2>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 w-full min-h-full">
 
@@ -15,6 +15,7 @@ export default (getTasks) => (`
           ${task.at_before !== null ? `<span class="text-sm text-green-600">À faire avant le ${task.at_before}</span>` : ''}
           <span class="text-sm text-black">Créer le ${task.created_at} par ${task.user_name}</span>
         </div>
+        ${task.asigned_to !== null ? `<span class="text-sm text-blue-600">Assignée à ${users.find((user) => user.user_id === task.asigned_to).user_name}</span>` : ''}
         <div class="flex justify-center mt-4 w-full space-x-2">
   ${task.make === 0
     ? `   <button class="make-task bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700" data-make="1" data-id="${task.id}">Fait</button>`
@@ -46,6 +47,15 @@ export default (getTasks) => (`
       <label for="date" class="block text-sm font-medium text-gray-700">Date d'échéance (laissez vide si pas de date d'échéance)</label>
       <input type="date" name="date"
         class="mt-1 block w-full border border-gray-300 rounded py-2 px-3 text-black">
+    </div>
+    <div>
+      <label for="user" class="block text-sm font-medium text-gray-700">Assigner à</label>
+      <select name="user" class="mt-1 block w-full border border-gray-300 rounded py-2 px-3 text-black">
+        <option value="" disabled selected>Choisir un utilisateur</option>
+        ${users.map((user) => `
+          <option value="${user.user_id}">${user.user_name}</option>
+        `).join('')}
+      </select>
     </div>
     <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">Ajouter</button>
   </form>

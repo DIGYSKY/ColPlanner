@@ -35,6 +35,7 @@ class TaskModels extends DbConnect
     $title = $input['title'] ?? null;
     $content = $input['content'] ?? null;
     $atBefore = $input['date'] ?? null;
+    $asignedTo = $input['forId'] ?? null;
 
     if (!$title || !$content) {
       return false;
@@ -45,14 +46,16 @@ class TaskModels extends DbConnect
               coloc_id, 
               title, 
               content, 
-              at_before
+              at_before,
+              asigned_to
             ) 
             VALUES (
               :user_id, 
               :coloc_id, 
               :title, 
               :content, 
-              :at_before
+              :at_before,
+              :asigned_to
             )";
     $request = $this->bdd->prepare($sql);
     $request->bindParam(':user_id', $userId);
@@ -60,6 +63,7 @@ class TaskModels extends DbConnect
     $request->bindParam(':title', $title);
     $request->bindParam(':content', $content);
     $request->bindParam(':at_before', $atBefore);
+    $request->bindParam(':asigned_to', $asignedTo);
     $request->execute();
 
     if ($request->errorCode() == 0) {

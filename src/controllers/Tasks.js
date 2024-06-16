@@ -23,14 +23,32 @@ const Tasks = class {
     }
   }
 
+  async getUsers() {
+    let response;
+
+    try {
+      response = await axios.get(`${this.apiLinks}/coloc/all`, {
+        headers: {
+          'Api-Key': this.apiKey
+        }
+      });
+    } catch (error) {
+      coockieManager.deleteCookie('current_coloc');
+      response = [];
+    }
+
+    return response.data[this.currentColoc].users;
+  }
+
   async renderTasks(id) {
     const mainButtons = Array.from(document.querySelectorAll('.main-col'));
     const main = document.querySelector('#app-corp');
     const getTasks = await this.getTasks();
+    const getUsers = await this.getUsers();
 
     let select = false;
 
-    main.innerHTML = tasks(getTasks);
+    main.innerHTML = tasks(getTasks, getUsers);
 
     if (main.innerHTML) {
       select = true;
@@ -54,8 +72,9 @@ const Tasks = class {
       const title = e.target.querySelector('[name="title"]').value;
       const content = e.target.querySelector('[name="content"]').value;
       const date = e.target.querySelector('[name="date"]').value || null;
+      const forId = e.target.querySelector('[name="user"]').value || null;
       if (title !== '' && content !== '') {
-        if (await this.sendTask(title, content, date)) {
+        if (await this.sendTask(title, content, date, forId)) {
           this.run();
         }
       }
@@ -103,12 +122,13 @@ const Tasks = class {
     return request.data;
   }
 
-  async sendTask(title, content, date) {
+  async sendTask(title, content, date, forId) {
     try {
       const request = await axios.post(`${this.apiLinks}/task/new`, {
         title,
         content,
-        date
+        date,
+        forId
       }, {
         headers: { 'Api-Key': this.apiKey }
       });
