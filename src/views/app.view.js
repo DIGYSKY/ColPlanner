@@ -8,12 +8,12 @@ export default () => (`
     <img class="logo-app" src="${logo}" alt="">
     <h1>Col<span>Planner</span></h1>
   </div>
-  <button id="dashboard-col" class="button-col main-col">DashBoard</button>
-  <button id="tasks-col" class="button-col main-col">Tasks</button>
+  <button id="dashboard-col" class="button-col main-col">Tableau de bord</button>
+  <button id="tasks-col" class="button-col main-col">Tâches</button>
   <button id="finance-col" class="button-col main-col">Finance</button>
-  <button id="comunicate-col" class="button-col main-col">Comunicate</button>
-  <button id="calandar-col" class="button-col main-col">Calandar</button>
-  <button id="mycoloc-col" class="button-col main-col">My coloc</button>
+  <button id="comunicate-col" class="button-col main-col">Messages</button>
+  <button id="calandar-col" class="button-col main-col">Calendrier</button>
+  <button id="mycoloc-col" class="button-col main-col">My Coloc</button>
   <button id="profile-col" class="button-col main-col">Profile</button>
 </div>
 </header>
