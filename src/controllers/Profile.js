@@ -27,6 +27,7 @@ const Profile = class {
 
         coockieManager.deleteCookie('apikey');
         coockieManager.deleteCookie('user');
+        coockieManager.deleteCookie('current_coloc');
 
         this.apiKey = false;
 
