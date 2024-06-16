@@ -1,5 +1,5 @@
 export default (comunicates) => (`
-<h2 class="text-2xl font-bold text-yellow-500 mx-auto mt-5 mb-5">Communicate</h2>
+<h2 class="text-2xl font-bold text-yellow-500 mx-auto mt-5 mb-5">Messages</h2>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 w-full min-h-full">
 
 <!-- Card pour afficher tous les messages -->
