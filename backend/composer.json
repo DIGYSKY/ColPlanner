@@ -1,0 +1,17 @@
+{
+    "name": "colplanner/www",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "App\\Controllers\\": "src/Controllers",
+            "App\\Models\\": "src/models"
+        }
+    },
+    "authors": [
+        {
+            "name": "DIGYSKY",
+            "email": "lilyan.chauveau@gmail.com"
+        }
+    ],
+    "require": {}
+}
